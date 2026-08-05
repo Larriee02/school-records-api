@@ -12,17 +12,26 @@ const Attendance = sequelize.define(
 
     date: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: false
     },
 
     status: {
-      type: DataTypes.ENUM("Present", "Absent"),
-      allowNull: false,
-    },
+      type: DataTypes.ENUM("Present", "Absent", "Late"),
+      allowNull: false
+    }
   },
   {
+    tableName:"attendance",
     timestamps: true,
+    indexes: [
+        {
+          unique: true,
+          fields: ["studentId", "date"]
+        },
+      ],
   }
 );
 
 export default Attendance;
+
+//*To prevent duplicate attendance records for the same student on the same day, we add a composite unique constraint: indexes

@@ -1,7 +1,7 @@
 import User from "./userModel.js";
 import Teacher from "./teacherModel.js";
 import Student from "./studentModel.js";
-import schoolClass from "./classModel.js";
+import SchoolClass from "./classModel.js";
 import Subject from "./subjectModel.js";
 import Attendance from "./attendanceModel.js";
 import Result from "./resultModel.js";
@@ -21,11 +21,11 @@ Teacher.belongsTo(User, {
 
 //class - student 1:N
 // One Class has many Students
-schoolClass.hasMany(Student, {
+SchoolClass.hasMany(Student, {
   foreignKey: "classId",
 });
 
-Student.belongsTo(schoolClass, {
+Student.belongsTo(SchoolClasschoolClass, {
   foreignKey: "classId",
 });
 
@@ -39,6 +39,15 @@ Teacher.hasMany(Subject, {
 Subject.belongsTo(Teacher, {
   foreignKey: "teacherId",
 });
+
+//teacher - class 1:N
+Teacher.hasMany(SchoolClass, {
+    foreignKey: "teacherId",
+  });
+
+SchoolClass.belongsTo(Teacher, {
+    foreignKey: "teacherId",
+  });
 
 
 //student - attendance taken 1:N
@@ -78,7 +87,7 @@ export {
   User,
   Teacher,
   Student,
-  schoolClass,
+  SchoolClasschoolClass,
   Subject,
   Attendance,
   Result,
