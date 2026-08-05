@@ -4,16 +4,18 @@ A RESTful API built with **Node.js**, **Express.js**, **PostgreSQL**, and **Sequ
 
 ---
 
-## Features
+# Features
 
-### Authentication & Authorization
+## Authentication & Authorization
+
 - User registration
 - User login
 - JWT authentication
 - Password hashing with bcrypt
 - Role-based authorization (Admin, Teacher)
 
-### Student Management
+## Student Management
+
 - Create student
 - View all students
 - View student by ID
@@ -22,42 +24,48 @@ A RESTful API built with **Node.js**, **Express.js**, **PostgreSQL**, and **Sequ
 - Search students
 - Assign students to classes
 
-### Teacher Management
+## Teacher Management
+
 - Create teacher profile
 - View all teachers
 - View teacher by ID
 - Update teacher
 - Delete teacher
 
-### Class Management
+## Class Management
+
 - Create class
 - View classes
 - Update class
 - Delete class
 - View students in a class
 
-### Subject Management
+## Subject Management
+
 - Create subject
 - Update subject
 - Delete subject
 - Assign teacher to subject
 
-### Attendance Management
+## Attendance Management
+
 - Mark attendance
 - View attendance
 - Update attendance
 - Delete attendance
 - View attendance history
 
-### Result Management
+## Result Management
+
 - Record student results
 - Update results
 - Delete results
 - Generate student transcript
-- Generate report card
+- Generate report cards
 - Automatic grade calculation
 
-### Email Notifications
+## Email Notifications
+
 - Welcome emails
 - Result notification emails
 - Password reset email template
@@ -70,7 +78,7 @@ A RESTful API built with **Node.js**, **Express.js**, **PostgreSQL**, and **Sequ
 - Express.js
 - PostgreSQL
 - Sequelize ORM
-- JWT (jsonwebtoken)
+- JSON Web Token (JWT)
 - bcryptjs
 - express-validator
 - Nodemailer
@@ -80,7 +88,7 @@ A RESTful API built with **Node.js**, **Express.js**, **PostgreSQL**, and **Sequ
 
 # Project Structure
 
-```
+```text
 school-records-api/
 │
 ├── src/
@@ -104,10 +112,10 @@ school-records-api/
 
 # Installation
 
-## Clone the repository
+## 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-repository.git
+git clone https://github.com/your-username/your-repository.git
 ```
 
 ```bash
@@ -116,7 +124,7 @@ cd school-records-api
 
 ---
 
-## Install dependencies
+## 2. Install dependencies
 
 ```bash
 npm install
@@ -124,11 +132,9 @@ npm install
 
 ---
 
-## Configure Environment Variables
+## 3. Configure Environment Variables
 
 Create a `.env` file in the project root.
-
-Example:
 
 ```env
 PORT=3000
@@ -139,7 +145,7 @@ DB_NAME=school_record_db
 DB_USER=postgres
 DB_PASSWORD=your_password
 
-JWT_SECRET=your_secret_key
+JWT_SECRET=your_super_secret_key
 JWT_EXPIRES_IN=7d
 
 MAIL_HOST=smtp.gmail.com
@@ -151,7 +157,7 @@ MAIL_FROM="School Record Management" <example@gmail.com>
 
 ---
 
-## Create PostgreSQL Database
+## 4. Create PostgreSQL Database
 
 Create a PostgreSQL database named:
 
@@ -161,7 +167,7 @@ school_record_db
 
 ---
 
-## Run the Project
+## 5. Start the Server
 
 Development mode
 
@@ -187,12 +193,12 @@ http://localhost:3000/api/v1
 
 # Authentication
 
-Protected routes require a JWT token.
+Protected endpoints require a JWT access token.
 
 Example:
 
 ```
-Authorization: Bearer your_jwt_token
+Authorization: Bearer <your_token>
 ```
 
 ---
@@ -210,102 +216,102 @@ Authorization: Bearer your_jwt_token
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
-| POST | /auth/register | Register user |
-| POST | /auth/login | Login user |
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Login user |
 
 ---
 
 ## Students
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /students |
-| GET | /students |
-| GET | /students/:id |
-| PUT | /students/:id |
-| DELETE | /students/:id |
-| GET | /students/search |
-| GET | /students/class/:classId |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/students` | Create student |
+| GET | `/students` | Get all students |
+| GET | `/students/:id` | Get student by ID |
+| PUT | `/students/:id` | Update student |
+| DELETE | `/students/:id` | Delete student |
+| GET | `/students/search` | Search students |
+| GET | `/students/class/:classId` | Get students by class |
 
 ---
 
 ## Teachers
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /teacher |
-| GET | /teacher |
-| GET | /teacher/:id |
-| PUT | /teacher/:id |
-| DELETE | /teacher/:id |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/teachers` | Create teacher |
+| GET | `/teachers` | Get all teachers |
+| GET | `/teachers/:id` | Get teacher by ID |
+| PUT | `/teachers/:id` | Update teacher |
+| DELETE | `/teachers/:id` | Delete teacher |
 
 ---
 
 ## Classes
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /class |
-| GET | /class |
-| GET | /class/:id |
-| PUT | /class/:id |
-| DELETE | /class/:id |
-| GET | /class/:id/students |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/classes` | Create class |
+| GET | `/classes` | Get all classes |
+| GET | `/classes/:id` | Get class by ID |
+| PUT | `/classes/:id` | Update class |
+| DELETE | `/classes/:id` | Delete class |
+| GET | `/classes/:id/students` | View students in a class |
 
 ---
 
 ## Subjects
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /subject |
-| GET | /subject |
-| GET | /subject/:id |
-| PUT | /subject/:id |
-| DELETE | /subject/:id |
-| PATCH | /subject/:id/assign-teacher |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/subjects` | Create subject |
+| GET | `/subjects` | Get all subjects |
+| GET | `/subjects/:id` | Get subject by ID |
+| PUT | `/subjects/:id` | Update subject |
+| DELETE | `/subjects/:id` | Delete subject |
+| PATCH | `/subjects/:id/assign-teacher` | Assign teacher to subject |
 
 ---
 
 ## Attendance
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /attendance |
-| GET | /attendance |
-| GET | /attendance/:id |
-| PUT | /attendance/:id |
-| DELETE | /attendance/:id |
-| GET | /attendance/student/:studentId |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/attendance` | Mark attendance |
+| GET | `/attendance` | Get all attendance records |
+| GET | `/attendance/:id` | Get attendance by ID |
+| PUT | `/attendance/:id` | Update attendance |
+| DELETE | `/attendance/:id` | Delete attendance |
+| GET | `/attendance/student/:studentId` | Get attendance history for a student |
 
 ---
 
 ## Results
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /result |
-| GET | /result/:id |
-| PUT | /result/:id |
-| DELETE | /result/:id |
-| GET | /result/transcript/:studentId |
-| GET | /result/report-card/:studentId/:term/:session |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/results` | Record result |
+| GET | `/results/:id` | Get result by ID |
+| PUT | `/results/:id` | Update result |
+| DELETE | `/results/:id` | Delete result |
+| GET | `/results/transcript/:studentId` | Get student transcript |
+| GET | `/results/report-card/:studentId/:term/:session` | Generate report card |
 
 ---
 
-# Database
+# Database Models
 
 The application uses PostgreSQL with Sequelize ORM.
 
-Main entities include:
+Main models:
 
-- Users
-- Teachers
-- Students
-- Classes
-- Subjects
+- User
+- Teacher
+- Student
+- Class
+- Subject
 - Attendance
-- Results
+- Result
 
 Relationships:
 
@@ -320,14 +326,14 @@ Relationships:
 
 # Error Handling
 
-A global error handler is used throughout the application.
+The API uses a centralized global error handler.
 
-Typical responses include:
+Example response:
 
 ```json
 {
-    "success": false,
-    "message": "Student not found."
+  "success": false,
+  "message": "Student not found."
 }
 ```
 
@@ -335,46 +341,47 @@ Typical responses include:
 
 # Team Members
 
-### Osondu Gabriel
+## Osondu Gabriel
 
-Responsibilities
+**Responsibilities**
 
-- Database Setup
-- Sequelize Models
+- Database configuration
+- Sequelize models
 - Authentication
 - Authorization
-- Student Management
-- Attendance Management
-- API Documentation
+- Student management
+- Attendance management
+- API documentation
 
 ---
 
-### Sanni
+## Sanni
 
-Responsibilities
+**Responsibilities**
 
-- Teacher Management
-- Class Management
-- Subject Management
-- Result Management
-- Email Service
-- README Documentation
+- Teacher management
+- Class management
+- Subject management
+- Result management
+- Email service
+- Project documentation
 
 ---
 
 # Future Improvements
 
 - Pagination
-- Filtering
+- Advanced filtering
 - Student dashboard
 - Parent accounts
 - File uploads
-- Report card PDF generation
+- PDF report card generation
 - Swagger/OpenAPI documentation
-- Unit and integration testing
+- Unit testing
+- Integration testing
 
 ---
 
 # License
 
-This project is intended for educational purposes.
+This project was developed for educational purposes.
