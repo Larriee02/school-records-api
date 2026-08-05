@@ -1,79 +1,99 @@
+import { Subject, Teacher, User } from "../models/index.js";
 
-const { Subject, Teacher, User } = require('../models');
+// Create a new subject
+export async function createSubject(subjectData) {
+  const { name, code, teacherId } = subjectData;
 
-async function createSubject({ name, code, teacherId }) {
-  const existing = await Subject.findOne({ where: { code } });
-  if (existing) {
-    const err = new Error('A subject with this code already exists');
-    err.statusCode = 409;
-    throw err;
+  const existingSubject = await Subject.findOne({ where: { code } });
+
+  if (existingSubject) {
+    const error = new Error("A subject with this code already exists.");
+    error.statusCode = 409;
+    throw error;
   }
-  return Subject.create({ name, code, teacherId: teacherId || null });
-}
 
-async function getAllSubjects() {
-  return Subject.findAll({
-    include: [
-      {
-        model: Teacher,
-        include: [{ model: User, attributes: ['name', 'email'] }],
-      },
-    ],
-    order: [['name', 'ASC']],
+  if (teacherId) {
+    const teacher = await Teacher.findByPk(teacherId);
+
+    if (!teacher) {
+      const error = new Error("Teacher not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+  }
+
+  return await Subject.create({
+    name,
+    code,
+    teacherId: teacherId || null
   });
 }
 
-async function getSubjectById(id) {
+// Get all subjects
+export async function getAllSubjects() {
+  return await Subject.findAll({
+    include: [{
+      model: Teacher,
+      include: [{
+        model: User,
+        attributes: ["id", "firstName", "lastName", "email"]
+      }]
+    }],
+    order: [["name", "ASC"]]
+  });
+}
+
+// Get subject by ID
+export async function getSubjectById(id) {
   const subject = await Subject.findByPk(id, {
-    include: [
-      {
-        model: Teacher,
-        include: [{ model: User, attributes: ['name', 'email'] }],
-      },
-    ],
+    include: [{
+      model: Teacher,
+      include: [{
+        model: User,
+        attributes: ["id", "firstName", "lastName", "email"]
+      }]
+    }]
   });
+
   if (!subject) {
-    const err = new Error('Subject not found');
-    err.statusCode = 404;
-    throw err;
+    const error = new Error("Subject not found.");
+    error.statusCode = 404;
+    throw error;
   }
+
   return subject;
 }
 
-async function updateSubject(id, updates) {
+// Update a subject
+export async function updateSubject(id, updatedData) {
   const subject = await getSubjectById(id);
-  await subject.update(updates);
+
+  // Duplicate code validation will be added during final testing
+  await subject.update(updatedData);
+
   return subject;
 }
 
-async function deleteSubject(id) {
+// Delete a subject
+export async function deleteSubject(id) {
   const subject = await getSubjectById(id);
+
   await subject.destroy();
-  return true;
 }
 
-/**
- * Assign a teacher to teach a subject.
- */
-async function assignTeacher(subjectId, teacherId) {
+// Assign a teacher to a subject
+export async function assignTeacher(subjectId, teacherId) {
   const subject = await getSubjectById(subjectId);
 
   const teacher = await Teacher.findByPk(teacherId);
+
   if (!teacher) {
-    const err = new Error('Teacher not found');
-    err.statusCode = 404;
-    throw err;
+    const error = new Error("Teacher not found.");
+    error.statusCode = 404;
+    throw error;
   }
 
   await subject.update({ teacherId });
-  return getSubjectById(subjectId);
-}
 
-module.exports = {
-  createSubject,
-  getAllSubjects,
-  getSubjectById,
-  updateSubject,
-  deleteSubject,
-  assignTeacher,
-};
+  return await getSubjectById(subjectId);
+}

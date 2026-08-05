@@ -1,5 +1,5 @@
 
-const { transporter, MAIL_FROM } = require('../config/mail');
+import { transporter, MAIL_FROM } from "../config/mail.js";
 
 
 async function sendMail({ to, subject, html }) {
@@ -89,9 +89,9 @@ async function sendPasswordResetEmail({ to, name, resetLink }) {
   return sendMail({ to, subject, html });
 }
 
-module.exports = {
+export {
   sendMail,
   sendWelcomeEmail,
   sendResultNotification,
-  sendPasswordResetEmail,
+  sendPasswordResetEmail
 };

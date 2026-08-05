@@ -1,25 +1,21 @@
+import nodemailer from "nodemailer";
 
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST || 'smtp.gmail.com',
+export const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST || "smtp.gmail.com",
   port: Number(process.env.MAIL_PORT) || 587,
-  secure: process.env.MAIL_PORT === '465', // true for port 465, false for other ports
+  secure: Number(process.env.MAIL_PORT) === 465,
   auth: {
     user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
-
-// Verify connection configuration on startup
-transporter.verify((error) => {
-  if (error) {
-    console.error('[mail] Transporter configuration error:', error.message);
-  } else {
-    console.log('[mail] Mail server is ready to send messages');
+    pass: process.env.MAIL_PASS
   }
 });
 
-const MAIL_FROM = process.env.MAIL_FROM || '"School Record Management" <no-reply@school.com>';
+try {
+  await transporter.verify();
+  console.log("[mail] Mail server is ready to send messages.");
+} catch (error) {
+  console.error("[mail] Transporter configuration error:", error.message);
+}
 
-module.exports = { transporter, MAIL_FROM };
+export const MAIL_FROM =
+  process.env.MAIL_FROM || '"School Record Management" <no-reply@school.com>';

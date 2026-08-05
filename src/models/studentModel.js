@@ -35,9 +35,17 @@ const Student = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    classLevl: {
+    classLevel: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+          isEmail: true
+      }
     }
   },
   {

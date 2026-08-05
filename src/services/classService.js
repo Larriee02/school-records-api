@@ -1,65 +1,102 @@
+import { SchoolClass, Student } from "../models/index.js";
 
-const { Class, Student } = require('../models');
+// Create a new class
+export async function createClass(classData) {
+  const { name, arm, capacity } = classData;
 
-async function createClass({ name, arm, capacity }) {
-  const existing = await Class.findOne({ where: { name } });
-  if (existing) {
-    const err = new Error('A class with this name already exists');
-    err.statusCode = 409;
-    throw err;
+  // Check if a class with the same name and arm already exists
+  const existingClass = await SchoolClass.findOne({
+    where: {
+      name,
+      arm
+    },
+  });
+
+  if (existingClass) {
+    const error = new Error(
+      "A class with this name and arm already exists."
+    )
+    error.statusCode = 409;
+    throw error;
   }
-  return Class.create({ name, arm, capacity });
-}
 
-async function getAllClasses() {
-  return Class.findAll({ order: [['name', 'ASC']] });
-}
-
-async function getClassById(id) {
-  const cls = await Class.findByPk(id);
-  if (!cls) {
-    const err = new Error('Class not found');
-    err.statusCode = 404;
-    throw err;
-  }
-  return cls;
-}
-
-async function updateClass(id, updates) {
-  const cls = await getClassById(id);
-  await cls.update(updates);
-  return cls;
-}
-
-async function deleteClass(id) {
-  const cls = await getClassById(id);
-  const studentCount = await Student.count({ where: { classId: id } });
-  if (studentCount > 0) {
-    const err = new Error('Cannot delete a class that still has students assigned to it');
-    err.statusCode = 400;
-    throw err;
-  }
-  await cls.destroy();
-  return true;
-}
-
-/**
- * View all students currently enrolled in a class.
- */
-async function getStudentsInClass(id) {
-  await getClassById(id); // ensures class exists
-  return Student.findAll({
-    where: { classId: id },
-    attributes: ['id', 'admissionNumber', 'firstName', 'lastName'],
-    order: [['lastName', 'ASC']],
+  return await SchoolClass.create({
+    name,
+    arm,
+    capacity
   });
 }
 
-module.exports = {
-  createClass,
-  getAllClasses,
-  getClassById,
-  updateClass,
-  deleteClass,
-  getStudentsInClass,
-};
+// Get all classes
+export async function getAllClasses() {
+  return await SchoolClass.findAll({
+    order: [["name", "ASC"]]
+  });
+}
+
+// Get a class by ID
+export async function getClassById(id) {
+  const schoolClass = await SchoolClass.findByPk(id);
+
+  if (!schoolClass) {
+    const error = new Error("Class not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  return schoolClass;
+}
+
+// Update a class
+export async function updateClass(id, updatedData) {
+  const schoolClass = await getClassById(id);
+
+  // NOTE:
+  // We'll add duplicate validation for name + arm
+  // during the final testing phase.
+
+  await schoolClass.update(updatedData);
+
+  return schoolClass;
+}
+
+// Delete a class
+export async function deleteClass(id) {
+  const schoolClass = await getClassById(id);
+
+  // Prevent deleting a class that still has students
+  const studentCount = await Student.count({
+    where: {
+      classId: id,
+    },
+  });
+
+  if (studentCount > 0) {
+    const error = new Error(
+      "Cannot delete a class that still has students assigned to it."
+    );
+    error.statusCode = 400;
+    throw error;
+  }
+
+  await schoolClass.destroy();
+}
+
+// Get all students in a class
+export async function getStudentsInClass(id) {
+  // Ensure the class exists
+  await getClassById(id);
+
+  return await Student.findAll({
+    where: {
+      classId: id,
+    },
+    attributes: [
+      "id",
+      "admissionNumber",
+      "firstName",
+      "lastName"
+    ],
+    order: [["lastName", "ASC"]],
+  });
+}

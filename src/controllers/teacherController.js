@@ -1,48 +1,84 @@
+import {
+  createTeacher,
+  getAllTeachers,
+  getTeacherById,
+  updateTeacher,
+  deleteTeacher
+} from "../services/teacherService.js";
 
-const teacherService = require('../services/teacherService');
-
-exports.createTeacher = async (req, res, next) => {
+// Create a teacher
+export const create = async (req, res, next) => {
   try {
-    const teacher = await teacherService.createTeacher(req.body);
-    res.status(201).json({ success: true, message: 'Teacher created successfully', data: teacher });
-  } catch (err) {
-    next(err);
+    const teacher = await createTeacher(req.body);
+
+    return res.status(201).json({
+      success: true,
+      message: "Teacher created successfully.",
+      data: teacher
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getAllTeachers = async (req, res, next) => {
+// Get all teachers
+export const getAll = async (req, res, next) => {
   try {
     const { page, limit } = req.query;
-    const result = await teacherService.getAllTeachers({ page: Number(page) || 1, limit: Number(limit) || 20 });
-    res.status(200).json({ success: true, ...result });
-  } catch (err) {
-    next(err);
+
+    const result = await getAllTeachers({
+      page: Number(page) || 1,
+      limit: Number(limit) || 20
+    });
+
+    return res.status(200).json({
+      success: true,
+      ...result
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getTeacherById = async (req, res, next) => {
+// Get teacher by ID
+export const getById = async (req, res, next) => {
   try {
-    const teacher = await teacherService.getTeacherById(req.params.id);
-    res.status(200).json({ success: true, data: teacher });
-  } catch (err) {
-    next(err);
+    const teacher = await getTeacherById(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      data: teacher
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.updateTeacher = async (req, res, next) => {
+// Update a teacher
+export const update = async (req, res, next) => {
   try {
-    const teacher = await teacherService.updateTeacher(req.params.id, req.body);
-    res.status(200).json({ success: true, message: 'Teacher updated successfully', data: teacher });
-  } catch (err) {
-    next(err);
+    const teacher = await updateTeacher(req.params.id, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Teacher updated successfully.",
+      data: teacher
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.deleteTeacher = async (req, res, next) => {
+// Delete a teacher
+export const remove = async (req, res, next) => {
   try {
-    await teacherService.deleteTeacher(req.params.id);
-    res.status(200).json({ success: true, message: 'Teacher deleted successfully' });
-  } catch (err) {
-    next(err);
+    await deleteTeacher(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Teacher deleted successfully."
+    });
+  } catch (error) {
+    next(error);
   }
 };

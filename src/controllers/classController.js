@@ -1,56 +1,96 @@
+import {
+  createClass,
+  getAllClasses,
+  getClassById,
+  updateClass,
+  deleteClass,
+  getStudentsInClass,
+} from "../services/classService.js";
 
-const classService = require('../services/classService');
-
-exports.createClass = async (req, res, next) => {
+// Create a new class
+export const create = async (req, res, next) => {
   try {
-    const cls = await classService.createClass(req.body);
-    res.status(201).json({ success: true, message: 'Class created successfully', data: cls });
-  } catch (err) {
-    next(err);
+    const schoolClass = await createClass(req.body);
+
+    return res.status(201).json({
+      success: true,
+      message: "Class created successfully.",
+      data: schoolClass,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getAllClasses = async (req, res, next) => {
+// Get all classes
+export const getAll = async (req, res, next) => {
   try {
-    const classes = await classService.getAllClasses();
-    res.status(200).json({ success: true, count: classes.length, data: classes });
-  } catch (err) {
-    next(err);
+    const classes = await getAllClasses();
+
+    return res.status(200).json({
+      success: true,
+      count: classes.length,
+      data: classes,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getClassById = async (req, res, next) => {
+// Get a class by ID
+export const getById = async (req, res, next) => {
   try {
-    const cls = await classService.getClassById(req.params.id);
-    res.status(200).json({ success: true, data: cls });
-  } catch (err) {
-    next(err);
+    const schoolClass = await getClassById(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      data: schoolClass,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.updateClass = async (req, res, next) => {
+// Update a class
+export const update = async (req, res, next) => {
   try {
-    const cls = await classService.updateClass(req.params.id, req.body);
-    res.status(200).json({ success: true, message: 'Class updated successfully', data: cls });
-  } catch (err) {
-    next(err);
+    const schoolClass = await updateClass(req.params.id, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Class updated successfully.",
+      data: schoolClass,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.deleteClass = async (req, res, next) => {
+// Delete a class
+export const remove = async (req, res, next) => {
   try {
-    await classService.deleteClass(req.params.id);
-    res.status(200).json({ success: true, message: 'Class deleted successfully' });
-  } catch (err) {
-    next(err);
+    await deleteClass(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Class deleted successfully.",
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getStudentsInClass = async (req, res, next) => {
+// Get all students in a class
+export const getStudents = async (req, res, next) => {
   try {
-    const students = await classService.getStudentsInClass(req.params.id);
-    res.status(200).json({ success: true, count: students.length, data: students });
-  } catch (err) {
-    next(err);
+    const students = await getStudentsInClass(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      count: students.length,
+      data: students
+    });
+  } catch (error) {
+    next(error);
   }
 };

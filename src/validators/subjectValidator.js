@@ -1,35 +1,26 @@
+import { body, param } from "express-validator";
 
-const { body, param, validationResult } = require('express-validator');
-
-const handleValidation = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ success: false, errors: errors.array() });
-  }
-  next();
-};
-
-exports.createSubjectRules = [
-  body('name').trim().notEmpty().withMessage('Subject name is required'),
-  body('code').trim().notEmpty().withMessage('Subject code is required'),
-  body('teacherId').optional().isUUID().withMessage('Invalid teacherId'),
-  handleValidation,
+// Validate subject creation
+export const createSubjectValidator = [
+  body("name").trim().notEmpty().withMessage("Subject name is required."),
+  body("code").trim().notEmpty().withMessage("Subject code is required."),
+  body("teacherId").optional().isUUID().withMessage("Invalid teacher ID.")
 ];
 
-exports.updateSubjectRules = [
-  param('id').isUUID().withMessage('Invalid subject id'),
-  body('name').optional().trim().notEmpty(),
-  body('code').optional().trim().notEmpty(),
-  handleValidation,
+// Validate subject update
+export const updateSubjectValidator = [
+  param("id").isUUID().withMessage("Invalid subject ID."),
+  body("name").optional().trim().notEmpty().withMessage("Subject name cannot be empty."),
+  body("code").optional().trim().notEmpty().withMessage("Subject code cannot be empty.")
 ];
 
-exports.assignTeacherRules = [
-  param('id').isUUID().withMessage('Invalid subject id'),
-  body('teacherId').isUUID().withMessage('A valid teacherId is required'),
-  handleValidation,
+// Validate assigning a teacher
+export const assignTeacherValidator = [
+  param("id").isUUID().withMessage("Invalid subject ID."),
+  body("teacherId").isUUID().withMessage("A valid teacher ID is required.")
 ];
 
-exports.idParamRule = [
-  param('id').isUUID().withMessage('Invalid subject id'),
-  handleValidation,
+// Validate subject ID
+export const idParamValidator = [
+  param("id").isUUID().withMessage("Invalid subject ID.")
 ];

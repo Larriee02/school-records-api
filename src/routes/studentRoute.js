@@ -12,9 +12,10 @@ import {
 
 import {
   createStudentValidator,
-  updateStudentValidator,
-  validateRequest,
+  updateStudentValidator
 } from "../validators/studentValidator.js";
+
+import { validateRequest } from "../middleware/validationMiddleware.js";
 
 import { authenticateUser } from "../middleware/authMiddleware.js";
 import { authorizeRoles } from "../middleware/roleMiddleware.js";

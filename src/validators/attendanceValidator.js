@@ -33,17 +33,3 @@ export const updateAttendanceValidator = [
     .isIn(["Present", "Absent", "Late"])
     .withMessage("Status must be Present, Absent, or Late.")
 ];
-
-// Return validation errors
-export const validateRequest = (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      success: false,
-      errors: errors.array()
-    });
-  }
-
-  next();
-};

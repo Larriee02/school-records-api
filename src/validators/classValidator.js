@@ -1,30 +1,49 @@
+import { body, param } from "express-validator";
 
-const { body, param, validationResult } = require('express-validator');
+// Validate class creation
+export const createClassValidator = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("Class name is required."),
 
-const handleValidation = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ success: false, errors: errors.array() });
-  }
-  next();
-};
+  body("arm")
+    .optional()
+    .isString()
+    .withMessage("Class arm must be a string."),
 
-exports.createClassRules = [
-  body('name').trim().notEmpty().withMessage('Class name is required'),
-  body('arm').optional().isString(),
-  body('capacity').optional().isInt({ min: 1 }).withMessage('Capacity must be a positive number'),
-  handleValidation,
+  body("capacity")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Capacity must be a positive integer."),
 ];
 
-exports.updateClassRules = [
-  param('id').isUUID().withMessage('Invalid class id'),
-  body('name').optional().trim().notEmpty(),
-  body('arm').optional().isString(),
-  body('capacity').optional().isInt({ min: 1 }),
-  handleValidation,
+// Validate class update
+export const updateClassValidator = [
+  param("id")
+    .isUUID()
+    .withMessage("Invalid class ID."),
+
+  body("name")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Class name cannot be empty."),
+
+  body("arm")
+    .optional()
+    .isString()
+    .withMessage("Class arm must be a string."),
+
+  body("capacity")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Capacity must be a positive integer."),
 ];
 
-exports.idParamRule = [
-  param('id').isUUID().withMessage('Invalid class id'),
-  handleValidation,
+// Validate class ID parameter
+export const idParamValidator = [
+  param("id")
+    .isUUID()
+    .withMessage("Invalid class ID."),
 ];

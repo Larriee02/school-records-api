@@ -12,10 +12,23 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({message: "Welcome to School Record Management API V1"});
+  res.status(200).json({
+    success: true,
+    message: "School Record Management API",
+    version: "1.0.0",
+    status: "Running"
+  });
 });
 
 app.use("/api/v1", Routes)
+
+//404 middleware
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found."
+  });
+});
 
 //error handler
 app.use(errorHandler)
@@ -29,8 +42,11 @@ async function startServer() {
     console.log("Database connected successfully.");
 
     // Create tables (development only)
-    await sequelize.sync({ alter: true });
-    console.log("Models synchronized.");
+    const isDevelopment = process.env.NODE_ENV !== "production";
+    if (isDevelopment) {
+      await sequelize.sync({ alter: true });
+      console.log("Models synchronized.");
+    }
 
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);

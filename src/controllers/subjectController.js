@@ -1,56 +1,96 @@
+import {
+  createSubject,
+  getAllSubjects,
+  getSubjectById,
+  updateSubject,
+  deleteSubject,
+  assignTeacher,
+} from "../services/subjectService.js";
 
-const subjectService = require('../services/subjectService');
-
-exports.createSubject = async (req, res, next) => {
+// Create a new subject
+export const create = async (req, res, next) => {
   try {
-    const subject = await subjectService.createSubject(req.body);
-    res.status(201).json({ success: true, message: 'Subject created successfully', data: subject });
-  } catch (err) {
-    next(err);
+    const subject = await createSubject(req.body);
+
+    return res.status(201).json({
+      success: true,
+      message: "Subject created successfully.",
+      data: subject,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getAllSubjects = async (req, res, next) => {
+// Get all subjects
+export const getAll = async (req, res, next) => {
   try {
-    const subjects = await subjectService.getAllSubjects();
-    res.status(200).json({ success: true, count: subjects.length, data: subjects });
-  } catch (err) {
-    next(err);
+    const subjects = await getAllSubjects();
+
+    return res.status(200).json({
+      success: true,
+      count: subjects.length,
+      data: subjects,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.getSubjectById = async (req, res, next) => {
+// Get a subject by ID
+export const getById = async (req, res, next) => {
   try {
-    const subject = await subjectService.getSubjectById(req.params.id);
-    res.status(200).json({ success: true, data: subject });
-  } catch (err) {
-    next(err);
+    const subject = await getSubjectById(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      data: subject,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.updateSubject = async (req, res, next) => {
+// Update a subject
+export const update = async (req, res, next) => {
   try {
-    const subject = await subjectService.updateSubject(req.params.id, req.body);
-    res.status(200).json({ success: true, message: 'Subject updated successfully', data: subject });
-  } catch (err) {
-    next(err);
+    const subject = await updateSubject(req.params.id, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Subject updated successfully.",
+      data: subject,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.deleteSubject = async (req, res, next) => {
+// Delete a subject
+export const remove = async (req, res, next) => {
   try {
-    await subjectService.deleteSubject(req.params.id);
-    res.status(200).json({ success: true, message: 'Subject deleted successfully' });
-  } catch (err) {
-    next(err);
+    await deleteSubject(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Subject deleted successfully.",
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
-exports.assignTeacher = async (req, res, next) => {
+// Assign a teacher to a subject
+export const assign = async (req, res, next) => {
   try {
-    const subject = await subjectService.assignTeacher(req.params.id, req.body.teacherId);
-    res.status(200).json({ success: true, message: 'Teacher assigned to subject successfully', data: subject });
-  } catch (err) {
-    next(err);
+    const subject = await assignTeacher(req.params.id, req.body.teacherId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Teacher assigned successfully.",
+      data: subject,
+    });
+  } catch (error) {
+    next(error);
   }
 };

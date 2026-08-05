@@ -43,12 +43,3 @@ export const loginValidator = [
     .withMessage("Provide a valid password")
 ]
 
-//middleware to return validation errors
-export function validateRequest(req, res, next){
-    const errors = await validationResult(req)
-
-    if(!errors.isEmpty()){
-        return res.status(400).json({success: false, message: "Validation failed", errors: errors.array()})
-    }
-    next()
-}

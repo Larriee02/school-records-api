@@ -4,15 +4,16 @@ import {
   create,
   getAll,
   getById,
-  getByStudent,
   update,
   remove,
-} from "../controllers/attendanceController.js";
+  getStudents
+} from "../controllers/classController.js";
 
 import {
-  createAttendanceValidator,
-  updateAttendanceValidator
-} from "../validators/attendanceValidator.js";
+  createClassValidator,
+  updateClassValidator,
+  idParamValidator
+} from "../validators/classValidator.js";
 
 import { validateRequest } from "../middleware/validationMiddleware.js";
 
@@ -22,55 +23,59 @@ import { authorizeRoles } from "../middleware/roleMiddleware.js";
 const router = Router();
 
 
-// Mark attendance
+
+// Protect all routes
+router.use(authenticateUser);
+
+// Create a new class
 router.post(
   "/",
-  authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
-  createAttendanceValidator,
+  authorizeRoles("Admin"),
+  createClassValidator,
   validateRequest,
   create
 );
 
-// Get all attendance records
+// Get all classes
 router.get(
   "/",
-  authenticateUser,
   authorizeRoles("Admin", "Teacher"),
   getAll
 );
 
-// Get attendance history for a student
+// Get students in a class
 router.get(
-  "/student/:studentId",
-  authenticateUser,
+  "/:id/students",
   authorizeRoles("Admin", "Teacher"),
-  getByStudent
+  idParamValidator,
+  validateRequest,
+  getStudents
 );
 
-// Get attendance by ID
+// Get a class by ID
 router.get(
   "/:id",
-  authenticateUser,
   authorizeRoles("Admin", "Teacher"),
+  idParamValidator,
+  validateRequest,
   getById
 );
 
-// Update attendance
+// Update a class
 router.put(
   "/:id",
-  authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
-  updateAttendanceValidator,
+  authorizeRoles("Admin"),
+  updateClassValidator,
   validateRequest,
   update
 );
 
-// Delete attendance (Admin only)
+// Delete a class
 router.delete(
   "/:id",
-  authenticateUser,
   authorizeRoles("Admin"),
+  idParamValidator,
+  validateRequest,
   remove
 );
 
