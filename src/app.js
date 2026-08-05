@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import { errorHandler } from "./middleware/errorHandler.js";
 import sequelize from "./config/database.js";
 import "./models/index.js";
 import Routes from "./routes/index.js"
@@ -15,6 +16,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", Routes)
+
+//error handler
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3000;
 

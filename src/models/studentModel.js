@@ -27,7 +27,7 @@ const Student = sequelize.define(
 
     dateOfBirth: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: false
     },
 
     admissionNumber: {
@@ -35,6 +35,10 @@ const Student = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    classLevl: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
   {
     tableName: "students",
