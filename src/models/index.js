@@ -25,7 +25,7 @@ SchoolClass.hasMany(Student, {
   foreignKey: "classId",
 });
 
-Student.belongsTo(SchoolClasschoolClass, {
+Student.belongsTo(SchoolClass, {
   foreignKey: "classId",
 });
 
@@ -33,14 +33,15 @@ Student.belongsTo(SchoolClasschoolClass, {
 //teacher - subject 1:N
 // One Teacher teaches many Subjects
 Teacher.hasMany(Subject, {
-  foreignKey: "teacherId",
+  foreignKey: "teacherId"
 });
 
 Subject.belongsTo(Teacher, {
-  foreignKey: "teacherId",
+  foreignKey: "teacherId"
 });
 
 //teacher - class 1:N
+//one teacher teaches many classes
 Teacher.hasMany(SchoolClass, {
     foreignKey: "teacherId",
   });
