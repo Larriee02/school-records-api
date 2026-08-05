@@ -25,6 +25,7 @@ const Result = sequelize.define(
     },
   },
   {
+    tableName: "results",
     timestamps: true,
   }
 );

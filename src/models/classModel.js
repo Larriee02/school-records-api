@@ -22,6 +22,7 @@ const schoolClass = sequelize.define(
     },
   },
   {
+    tableName: "classes",
     timestamps: true,
   }
 );

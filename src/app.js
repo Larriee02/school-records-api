@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import sequelize from "./config/database.js";
 import "./models/index.js";
+import Routes from "./routes/index.js"
 
 dotenv.config();
 
@@ -10,8 +11,10 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({message: "Welcome to School Record Management API"});
+  res.json({message: "Welcome to School Record Management API V1"});
 });
+
+app.use("/api/v1", Routes)
 
 const PORT = process.env.PORT || 3000;
 
