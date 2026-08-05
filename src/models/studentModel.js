@@ -31,22 +31,28 @@ const Student = sequelize.define(
     },
 
     admissionNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    classLevel: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-          isEmail: true
-      }
-    }
+  type: DataTypes.STRING,
+  allowNull: false,
+  unique: true,
+},
+
+  classId: {
+  type: DataTypes.UUID,
+  allowNull: false,
+  references: {
+    model: "classes",
+    key: "id",
+  },
+},
+
+  email: {
+  type: DataTypes.STRING,
+  allowNull: false,
+  unique: true,
+  validate: {
+    isEmail: true,
+  },
+},
   },
   {
     tableName: "students",

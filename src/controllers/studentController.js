@@ -103,7 +103,7 @@ export const search = async (req, res, next) => {
 // Filter students by class
 export const filterByClass = async (req, res, next) => {
   try {
-    const students = await getStudentsByClass(req.params.classLevel);
+    const students = await getStudentsByClass(req.params.classId);
 
     return res.status(200).json({
       success: true,

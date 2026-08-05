@@ -25,15 +25,15 @@ export const registerValidator = [
     .withMessage("Password must be at least 8 characters long"),
 
     body("role")
-    .isIn(["Admin", "Teacher"])
-    .withMessage("Role must be either Admin or Teacher"),
+    .isIn(["admin", "teacher", "student"])
+    .withMessage("Role must be either Admin or Teacher or student"),
 ]
 
 //validation rules for user login
 
 export const loginValidator = [
     body("email")
-    .isTrim()
+    .trim()
     .isEmail()
     .withMessage("Please provide a valid email address")
     .normalizeEmail(),

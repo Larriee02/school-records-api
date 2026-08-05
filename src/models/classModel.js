@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js"
+import sequelize from "../config/database.js";
 
-const schoolClass = sequelize.define(
-  "schoolClass",
+const SchoolClass = sequelize.define(
+  "SchoolClass",
   {
     id: {
       type: DataTypes.UUID,
@@ -10,15 +10,23 @@ const schoolClass = sequelize.define(
       primaryKey: true,
     },
 
-    className: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
-    level: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    arm: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    capacity: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 1,
+      },
     },
   },
   {
@@ -27,4 +35,4 @@ const schoolClass = sequelize.define(
   }
 );
 
-export default schoolClass;
+export default SchoolClass;

@@ -30,7 +30,7 @@ router.use(authenticateUser);
 // Create a new class
 router.post(
   "/",
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   createClassValidator,
   validateRequest,
   create
@@ -39,14 +39,14 @@ router.post(
 // Get all classes
 router.get(
   "/",
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getAll
 );
 
 // Get students in a class
 router.get(
   "/:id/students",
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   idParamValidator,
   validateRequest,
   getStudents
@@ -55,7 +55,7 @@ router.get(
 // Get a class by ID
 router.get(
   "/:id",
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   idParamValidator,
   validateRequest,
   getById
@@ -64,7 +64,7 @@ router.get(
 // Update a class
 router.put(
   "/:id",
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   updateClassValidator,
   validateRequest,
   update
@@ -73,7 +73,7 @@ router.put(
 // Delete a class
 router.delete(
   "/:id",
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   idParamValidator,
   validateRequest,
   remove

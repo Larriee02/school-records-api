@@ -23,12 +23,7 @@ export const createStudentValidator = [
   body("admissionNumber")
     .trim()
     .notEmpty()
-    .withMessage("Admission number is required."),
-
-  body("classLevel")
-    .trim()
-    .notEmpty()
-    .withMessage("Class level is required.")
+    .withMessage("Admission number is required.")
 ];
 
 // Validation rules for updating a student - use optional since its not a must to update every field of a student
@@ -45,9 +40,10 @@ export const updateStudentValidator = [
     .optional()
     .isISO8601(),
 
-  body("classLevel")
-    .optional()
-    .trim()
-    .notEmpty()
+  body("classId")
+  .notEmpty()
+  .withMessage("Class ID is required.")
+  .isUUID()
+  .withMessage("Invalid class ID.")
 ];
 

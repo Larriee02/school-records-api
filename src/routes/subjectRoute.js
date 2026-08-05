@@ -26,21 +26,21 @@ const router = Router();
 router.use(authenticateUser);
 
 // Create a subject
-router.post("/", authorizeRoles("Admin"), createSubjectValidator, validateRequest, create);
+router.post("/", authorizeRoles("admin"), createSubjectValidator, validateRequest, create);
 
 // Get all subjects
-router.get("/", authorizeRoles("Admin", "Teacher"), getAll);
+router.get("/", authorizeRoles("admin", "teacher"), getAll);
 
 // Get a subject by ID
-router.get("/:id", authorizeRoles("Admin", "Teacher"), idParamValidator, validateRequest, getById);
+router.get("/:id", authorizeRoles("admin", "teacher"), idParamValidator, validateRequest, getById);
 
 // Update a subject
-router.put("/:id", authorizeRoles("Admin"), updateSubjectValidator, validateRequest, update);
+router.put("/:id", authorizeRoles("admin"), updateSubjectValidator, validateRequest, update);
 
 // Delete a subject
-router.delete("/:id", authorizeRoles("Admin"), idParamValidator, validateRequest, remove);
+router.delete("/:id", authorizeRoles("admin"), idParamValidator, validateRequest, remove);
 
 // Assign a teacher to a subject
-router.patch("/:id/assign-teacher", authorizeRoles("Admin"), assignTeacherValidator, validateRequest, assign);
+router.patch("/:id/assign-teacher", authorizeRoles("admin"), assignTeacherValidator, validateRequest, assign);
 
 export default router;

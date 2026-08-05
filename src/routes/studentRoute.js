@@ -23,21 +23,21 @@ import { authorizeRoles } from "../middleware/roleMiddleware.js";
 const route = Router();
 
 
-// Create a student (Admin only)
+// Create a student (admin only)
 route.post(
   "/",
   authenticateUser,
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   createStudentValidator,
   validateRequest,
   create
 );
 
-// Get all students (Admin & Teacher)
+// Get all students (admin & teacher)
 route.get(
   "/",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getAll
 );
 
@@ -45,7 +45,7 @@ route.get(
 route.get(
   "/search",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   search
 );
 
@@ -53,7 +53,7 @@ route.get(
 route.get(
   "/class/:classLevel",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   filterByClass
 );
 
@@ -61,7 +61,7 @@ route.get(
 route.get(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getById
 );
 
@@ -69,17 +69,17 @@ route.get(
 route.put(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   updateStudentValidator,
   validateRequest,
   update
 );
 
-// Delete student (Admin only)
+// Delete student (admin only)
 route.delete(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   remove
 );
 

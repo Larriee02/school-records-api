@@ -79,10 +79,11 @@ export async function searchStudents(keyword) {
 }
 
 // Filter students by class
-export async function getStudentsByClass(classLevel) {
+// Get students by class
+export async function getStudentsByClass(classId) {
   return await Student.findAll({
     where: {
-      classLevel,
+      classId,
     },
     order: [["lastName", "ASC"]],
   });

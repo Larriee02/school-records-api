@@ -26,7 +26,7 @@ const router = Router();
 router.post(
   "/",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   createAttendanceValidator,
   validateRequest,
   create
@@ -36,7 +36,7 @@ router.post(
 router.get(
   "/",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getAll
 );
 
@@ -44,7 +44,7 @@ router.get(
 router.get(
   "/student/:studentId",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getByStudent
 );
 
@@ -52,7 +52,7 @@ router.get(
 router.get(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   getById
 );
 
@@ -60,17 +60,17 @@ router.get(
 router.put(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin", "Teacher"),
+  authorizeRoles("admin", "teacher"),
   updateAttendanceValidator,
   validateRequest,
   update
 );
 
-// Delete attendance (Admin only)
+// Delete attendance (admin only)
 router.delete(
   "/:id",
   authenticateUser,
-  authorizeRoles("Admin"),
+  authorizeRoles("admin"),
   remove
 );
 
