@@ -88,7 +88,7 @@ export {
   User,
   Teacher,
   Student,
-  SchoolClasschoolClass,
+  SchoolClass,
   Subject,
   Attendance,
   Result,

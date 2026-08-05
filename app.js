@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import { errorHandler } from "./middleware/errorHandler.js";
-import sequelize from "./config/database.js";
-import "./models/index.js";
-import Routes from "./routes/index.js"
+import { errorHandler } from "./src/middleware/errorHandler.js";
+import sequelize from "./src/config/database.js";
+import "./src/models/index.js";
+import Routes from "./src/routes/index.js"
 
 dotenv.config();
 
