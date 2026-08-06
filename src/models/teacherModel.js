@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js"
+import sequelize from "../config/database.js";
 
 const Teacher = sequelize.define(
   "Teacher",
@@ -10,30 +10,32 @@ const Teacher = sequelize.define(
       primaryKey: true,
     },
 
-    firstName: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.UUID,
       allowNull: false,
+      unique: true,
     },
 
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-
-    phone: {
+    staffId: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
-    password: {
+    department: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
-    role: {
-      type: DataTypes.ENUM("Admin", "Teacher"),
-      allowNull: false,
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
+    },
+
+    qualification: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

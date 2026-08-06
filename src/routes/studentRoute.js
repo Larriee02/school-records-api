@@ -51,7 +51,7 @@ route.get(
 
 // Filter students by class
 route.get(
-  "/class/:classLevel",
+  "/class/:classId",
   authenticateUser,
   authorizeRoles("admin", "teacher"),
   filterByClass

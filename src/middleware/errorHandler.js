@@ -1,6 +1,8 @@
 // Global error handling middleware
 export const errorHandler = (error, req, res, next) => {
 
+  console.error(error.errors || error);
+
   // Default to Internal Server Error
   const statusCode = error.statusCode || 500;
 
