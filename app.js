@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./src/swagger/swagger.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
 import sequelize from "./src/config/database.js";
 import "./src/models/index.js";
@@ -20,6 +22,10 @@ app.get("/", (req, res) => {
   });
 });
 
+//swagger doc
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+//api routes
 app.use("/api/v1", Routes)
 
 //404 middleware

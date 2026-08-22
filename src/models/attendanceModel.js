@@ -10,25 +10,30 @@ const Attendance = sequelize.define(
       primaryKey: true,
     },
 
+    studentId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+
     date: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
     },
 
     status: {
       type: DataTypes.ENUM("Present", "Absent", "Late"),
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
-    tableName:"attendance",
+    tableName: "attendance",
     timestamps: true,
     indexes: [
-        {
-          unique: true,
-          fields: ["studentId", "date"]
-        },
-      ],
+      {
+        unique: true,
+        fields: ["studentId", "date"],
+      },
+    ],
   }
 );
 

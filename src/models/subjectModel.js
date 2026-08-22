@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database.js"
+import sequelize from "../config/database.js";
 
 const Subject = sequelize.define(
   "Subject",
@@ -10,16 +10,21 @@ const Subject = sequelize.define(
       primaryKey: true,
     },
 
-    subjectName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
-    subjectCode: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+
+    teacherId: {
+      type: DataTypes.UUID,
+      allowNull: true,
     },
   },
   {

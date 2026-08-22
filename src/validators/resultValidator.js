@@ -33,3 +33,4 @@ export const reportCardParamValidator = [
   param("term").isIn(["First Term", "Second Term", "Third Term"]).withMessage("Invalid term."),
   param("session").matches(/^\d{4}\/\d{4}$/).withMessage("Session must be in the format YYYY/YYYY.")
 ];
+
