@@ -18,4 +18,4 @@ try {
 }
 
 export const MAIL_FROM =
-  process.env.MAIL_FROM || '"School Record Management" <no-reply@school.com>';
+  process.env.MAIL_FROM || '"School Record Management" <schoolmgt0@gmail.com>';
