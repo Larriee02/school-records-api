@@ -18,7 +18,7 @@ const options = {
                 description: "Local development"
             },
             {
-                url: "https://school-records-api-production.up.railway.app",
+                url: "https://school-records-api-production.up.railway.app/api",
                 description: "Production server"
             }
         ],
