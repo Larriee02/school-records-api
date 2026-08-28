@@ -14,11 +14,11 @@ const options = {
 
         servers: [
             {
-                url: "http://localhost:3000/api",
+                url: "http://localhost:3000/api/v1",
                 description: "Local development"
             },
             {
-                url: "https://school-records-api-production.up.railway.app/api",
+                url: "https://school-records-api-production.up.railway.app/api/v1",
                 description: "Production server"
             }
         ],
