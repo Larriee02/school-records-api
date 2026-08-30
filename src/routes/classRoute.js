@@ -4,7 +4,7 @@
  *   - name: Classes
  *     description: School class management
  *
- * /classes:
+ * /api/v1/classes:
  *   post:
  *     summary: Create a new class
  *     tags:
@@ -37,7 +37,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /classes/{id}:
+ * /api/v1/classes/{id}:
  *   get:
  *     summary: Get a class by ID
  *     tags:
@@ -111,7 +111,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /classes/{id}/students:
+ * /api/v1/classes/{id}/students:
  *   get:
  *     summary: Get all students in a class
  *     tags:
@@ -218,3 +218,4 @@ router.delete(
 );
 
 export default router;
+
