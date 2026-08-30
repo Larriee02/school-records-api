@@ -4,7 +4,7 @@
  *   - name: Subjects
  *     description: Subject management
  *
- * /subjects:
+ * /api/v1/subjects:
  *   post:
  *     summary: Create a new subject
  *     description: Create a new subject. Only administrators can perform this action.
@@ -41,7 +41,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /subjects/{id}:
+ * /api/v1/subjects/{id}:
  *   get:
  *     summary: Get a subject by ID
  *     description: Retrieve a subject and its assigned teacher.
@@ -124,7 +124,7 @@
  *       404:
  *         description: Subject not found
  *
- * /subjects/{id}/assign-teacher:
+ * /api/v1/subjects/{id}/assign-teacher:
  *   patch:
  *     summary: Assign a teacher to a subject
  *     description: Assign an existing teacher profile to a subject.
@@ -204,3 +204,4 @@ router.delete("/:id", authorizeRoles("admin"), idParamValidator, validateRequest
 router.patch("/:id/assign-teacher", authorizeRoles("admin"), assignTeacherValidator, validateRequest, assign);
 
 export default router;
+
