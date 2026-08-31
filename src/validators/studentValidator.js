@@ -1,4 +1,4 @@
-import { body, validationResult } from "express-validator";
+import { body, param, validationResult } from "express-validator";
 
 // Validation rules for creating a student
 export const createStudentValidator = [
@@ -28,6 +28,10 @@ export const createStudentValidator = [
 
 // Validation rules for updating a student - use optional since its not a must to update every field of a student
 export const updateStudentValidator = [
+  param("id")
+  .isUUID()
+  .withMessage("Invalid student ID."),
+
   body("firstName").optional().trim().notEmpty(),
 
   body("lastName").optional().trim().notEmpty(),
@@ -41,8 +45,7 @@ export const updateStudentValidator = [
     .isISO8601(),
 
   body("classId")
-  .notEmpty()
-  .withMessage("Class ID is required.")
+  .optional()
   .isUUID()
   .withMessage("Invalid class ID.")
 ];

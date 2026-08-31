@@ -78,7 +78,7 @@ export async function getAllTeachers({ page = 1, limit = 20 } = {}) {
   };
 }
 
-// Get teacher by ID
+// Get teacher by ID - use id of profile created
 export async function getTeacherById(id) {
   const teacher = await Teacher.findByPk(id, {
     include: [

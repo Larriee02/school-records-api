@@ -63,20 +63,21 @@
  *       403:
  *         description: User is not authorized
  *
- * /students/class/{classLevel}:
+ * /students/class/{classId}:
  *   get:
  *     summary: Get students by class
  *     description: Retrieve all students belonging to a specific class.
  *     tags:
  *       - Students
  *     parameters:
- *       - name: classLevel
+ *       - name: classId
  *         in: path
  *         required: true
- *         description: Class level of the students
+ *         description: Id of the class
  *         schema:
  *           type: string
- *         example: Form 5
+ *         format: uuid
+ *         example: 1331a0ec-f6a4-4814-9a0f-d42114593cf0
  *     responses:
  *       200:
  *         description: Students retrieved successfully
