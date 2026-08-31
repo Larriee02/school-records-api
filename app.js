@@ -48,11 +48,8 @@ async function startServer() {
     console.log("Database connected successfully.");
 
     // Create tables (development only)
-    const isDevelopment = process.env.NODE_ENV !== "production";
-    if (isDevelopment) {
-      await sequelize.sync({ alter: true });
-      console.log("Models synchronized.");
-    }
+    await sequelize.sync({ alter: true });
+console.log("Models synchronized.");
 
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on ${PORT}`);

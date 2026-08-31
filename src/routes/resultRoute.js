@@ -4,7 +4,7 @@
  *   - name: Results
  *     description: Student academic results management
  *
- * /results:
+ * /api/v1/results:
  *   post:
  *     summary: Record a student's result
  *     description: Record a student's CA and examination scores. The total score, grade and remark are calculated automatically.
@@ -32,7 +32,7 @@
  *       409:
  *         description: A result already exists for this student, subject, term and session
  *
- * /results/{id}:
+ * /api/v1/results/{id}:
  *   get:
  *     summary: Get a result by ID
  *     description: Retrieve a specific student result.
@@ -121,7 +121,7 @@
  *       404:
  *         description: Result not found
  *
- * /results/transcript/{studentId}:
+ * /api/v1/results/transcript/{studentId}:
  *   get:
  *     summary: Get a student's transcript
  *     description: Retrieve the complete academic history of a student across sessions and terms.
@@ -150,7 +150,7 @@
  *       404:
  *         description: Student not found
  *
- * /results/report-card/{studentId}/{term}/{session}:
+ * /api/v1/results/report-card/{studentId}/{term}/{session}:
  *   get:
  *     summary: Generate a student's report card
  *     description: Generate a report card containing subject results and the student's overall average for a selected term and academic session.
@@ -287,3 +287,4 @@ router.get(
 );
 
 export default router;
+

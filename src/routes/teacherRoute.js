@@ -4,7 +4,7 @@
  *   - name: Teachers
  *     description: Teacher management
  *
- * /teachers:
+ * /api/v1/teachers:
  *   get:
  *     summary: Get all teachers
  *     description: Retrieve all teacher profiles with their linked user information.
@@ -64,7 +64,7 @@
  *       403:
  *         description: Only administrators can create teachers
  *
- * /teachers/{id}:
+ * /api/v1/teachers/{id}:
  *   get:
  *     summary: Get a teacher by ID
  *     description: Retrieve a teacher profile and its linked user information.
@@ -205,3 +205,4 @@ router
   );
 
 export default router;
+

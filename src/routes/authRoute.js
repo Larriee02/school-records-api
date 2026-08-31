@@ -4,7 +4,7 @@
  *   - name: Authentication
  *     description: User registration and authentication
  *
- * /auth/register:
+ * /api/v1/auth/register:
  *   post:
  *     summary: Register a new user
  *     description: Creates a new user account with the specified role.
@@ -70,7 +70,7 @@
  *       400:
  *         description: Registration failed
  *
- * /auth/login:
+ * /api/v1/auth/login:
  *   post:
  *     summary: Login a user
  *     description: Authenticates an existing user and returns a JWT token.
@@ -135,3 +135,4 @@ route.post("/register", registerValidator, validateRequest, register)
 route.post("/login", loginValidator, validateRequest, login)
 
 export default route
+

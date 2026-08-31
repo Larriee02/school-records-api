@@ -4,7 +4,7 @@
  *   - name: Attendance
  *     description: Student attendance management
  *
- * /attendance:
+ * /api/v1/attendance:
  *   post:
  *     summary: Mark student attendance
  *     description: Mark a student's attendance for a specific date. A student cannot have more than one attendance record for the same date.
@@ -43,7 +43,7 @@
  *       403:
  *         description: Only administrators and teachers can view attendance
  *
- * /attendance/student/{studentId}:
+ * /api/v1/attendance/student/{studentId}:
  *   get:
  *     summary: Get attendance history for a student
  *     description: Retrieve all attendance records belonging to a specific student.
@@ -68,7 +68,7 @@
  *       404:
  *         description: Student not found
  *
- * /attendance/{id}:
+ * /api/v1/attendance/{id}:
  *   get:
  *     summary: Get attendance record by ID
  *     description: Retrieve a specific attendance record.
@@ -227,3 +227,4 @@ router.delete(
 );
 
 export default router;
+

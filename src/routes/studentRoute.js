@@ -4,7 +4,7 @@
  *   - name: Students
  *     description: Student management
  *
- * /students:
+ * /api/v1/students:
  *   get:
  *     summary: Get all students
  *     description: Retrieve all students.
@@ -41,7 +41,7 @@
  *       403:
  *         description: Only administrators can create students
  *
- * /students/search:
+ * /api/v1/students/search:
  *   get:
  *     summary: Search students
  *     description: Search students by first name or last name.
@@ -63,7 +63,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /students/class/{classId}:
+ * /api/v1/students/class/{classLevel}:
  *   get:
  *     summary: Get students by class
  *     description: Retrieve all students belonging to a specific class.
@@ -86,7 +86,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /students/{id}:
+ * /api/v1/students/{id}:
  *   get:
  *     summary: Get a student by ID
  *     tags:
@@ -251,3 +251,4 @@ route.delete(
 );
 
 export default route;
+
