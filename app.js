@@ -49,7 +49,7 @@ async function startServer() {
 
     // Create tables (development only)
     await sequelize.sync({ alter: true });
-console.log("Models synchronized.");
+    console.log("Models synchronized.");
 
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on ${PORT}`);
