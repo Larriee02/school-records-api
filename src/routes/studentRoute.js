@@ -63,7 +63,7 @@
  *       403:
  *         description: User is not authorized
  *
- * /api/v1/students/class/{classLevel}:
+ * /api/v1/students/class/{classId}:
  *   get:
  *     summary: Get students by class
  *     description: Retrieve all students belonging to a specific class.
